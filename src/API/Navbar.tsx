@@ -1,15 +1,29 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Navbar: React.FC = () => {
+  const links = [
+    { to: '/', label: 'Home' },
+    { to: '/cat', label: 'Cat' },
+    { to: '/gallery', label: 'Gallery' },
+    { to: '/about', label: 'About' },
+    { to: '/status', label: 'Status' },
+  ]
+
   return (
-    <nav style={{ backgroundColor:'#76aed6ff' , padding: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.06)', borderRadius: 8, marginBottom: 24 }}>
-      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-        <h2 style={{ margin: 0 }}>🐾 My Cat App</h2>
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
-          <Link to="/">Home</Link>
-          <Link to="/cat">CAT</Link>
-          <Link to="/gallery">Gallery</Link>
-          <Link to="/about">About</Link>
+    <nav className="navbar">
+      <div className="navbar-inner">
+        <span className="nav-brand">Our Random App</span>
+        <div className="nav-links">
+          {links.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.to === '/'}
+              className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+            >
+              {link.label}
+            </NavLink>
+          ))}
         </div>
       </div>
     </nav>
